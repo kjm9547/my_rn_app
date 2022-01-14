@@ -1,21 +1,37 @@
 import React, { useState } from "react";
-import {View,Text,StyleSheet} from 'react-native';
-import Props from './component/props'
-const app = () => {
-  const today = new Date()
-  const [count,setCount] = useState(0);
-  function up() { setCount(count+1)}
-  const down = () => setCount(count-1)
-  
-  
+import { SafeAreaView,StyleSheet } from 'react-native'
+import Datehead from './component/date'
+import InputArea from "./component/textbox";
+import WorkList from "./component/worklist";
+const App= () => {
+  const date =new Date()
+  const year = date.getFullYear()
+  const month = date.getMonth()
+  const day = date.getDate()
+  const [user_list,setList] =useState([ 
+    {done:true, text:"공부하기", id:1},
+    {done:false, text:"사업하기", id:2},
+    {done:false, text:"코인하기", id:3},
+    {done:false, text:"학교가기", id:4},
+  ])
+ 
+  return(
 
-  return(   
-
-      <Props counts={count} down={down} up={up} date={today}/>
+    <SafeAreaView style = {styles.container}>
+      <Datehead year={year} month={month} day={day} ></Datehead>
+      <WorkList user_list = {user_list}></WorkList>
+      <InputArea></InputArea>
+  
+    </SafeAreaView>
   )
-
 }
 
+const styles = StyleSheet.create(
+  {
+    container:{
+      flex:1
+    }
+  }
+)
 
-
-export default app;
+export default App;
