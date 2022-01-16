@@ -14,13 +14,25 @@ const App= () => {
     {done:false, text:"코인하기", id:3},
     {done:false, text:"학교가기", id:4},
   ])
- 
+
+  const On_Add_Bt = (text) =>{
+    const nextid = Math.max(...user_list.map(todo => todo.id))+1
+    const todo = {
+      id:nextid,
+      text,
+      done:false
+    }
+    setList(user_list.concat(todo))
+
+  }
+
+
   return(
 
     <SafeAreaView style = {styles.container}>
       <Datehead year={year} month={month} day={day} ></Datehead>
-      <WorkList user_list = {user_list}></WorkList>
-      <InputArea></InputArea>
+      <WorkList user_list = {user_list} done={user_list.done} ></WorkList>
+      <InputArea On_Add_Bt={On_Add_Bt}></InputArea>
   
     </SafeAreaView>
   )
